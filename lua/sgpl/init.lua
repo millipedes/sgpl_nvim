@@ -11,9 +11,9 @@ function M.setup(opts)
   })
 
   -- Set up LSP
+  local lsp_script = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":h") .. "/lsp.lua"
   local lsp_path = opts.lsp_cmd or {
-    "lua",
-    vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":h") .. "/lsp.lua"
+    vim.v.progpath, "--headless", "-l", lsp_script
   }
 
   vim.api.nvim_create_autocmd("FileType", {
